@@ -1,3 +1,6 @@
+$(document).ready(function () {
+
+
 // the current day is displayed at the top of the calendar 
 
 var today = dayjs();
@@ -8,16 +11,29 @@ $('#currentDay').text(today.format('MMM D, YYYY'));
 // WHEN I view the timeblocks for that day
 // THEN each timeblock is color coded to indicate whether it is in the past, present, or future 
 
-var currentTime = today.getHours()
-$('#currentTime').text(today.format('MMM D, YYYY'));
+var currentTimeEl = dayjs();
+$('#currentTime').text(currentTimeEl.format('HH'));
+currentTimeEl.visibility = "hidden";
+})
 
 
+var blockHour;
+var timeBlockEl = document.querySelector('#time-block')
 
+/ $('.time-block').each(function () {
+    if(blockHour < currentTime) {
+  blockHourEl.css('color', 'gray');
 
+    } else if (blockHour === currentTime) {
+  blockHour.css('color','red');
 
+    } else{
+  blockHour.css('color','green');
+    }
+  })
 // $('');
 
-// $(document).ready(function () {
+// 
 //   var stringVar =“3”
 //   var numVar = parseInt(stringVar)
 //   console.log(stringVar == numVar);
