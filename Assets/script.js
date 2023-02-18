@@ -21,28 +21,28 @@ function colorTimeBlocks(hourOfDay) {
   for(var i = 9; i < 18; i++) {
     var hourTime = Number($(`#hour-${i}`).attr("data-time"));
     var className;
+  
     if (hourOfDay > hourTime) {
       className = "past"
     }
-    else if (hourOfDay === hourTime) {
-      className = "present"
+    else if (hourOfDay == hourTime) {
+      className = "present";
     }
     else {
       className = "future"
     }
     $(`#hour-${i} textarea`).addClass(className)
   }
-  
 }
 
 saveUserInput();
 
-var savingTaskEntry = document.querySelector("#save");
+var savingTaskEntry = document.querySelector("#btn saveBtn col-2 col-md-1");
 
 savingTaskEntry.addEventListener("click", saveUserInput);
 
 function saveUserInput() {
- localStorage.getItem();
+ localStorage.setItem();
 
 }
 
