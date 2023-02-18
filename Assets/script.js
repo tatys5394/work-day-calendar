@@ -2,44 +2,49 @@ $(document).ready(function () {
   // the current day is displayed at the top of the calendar
 
   var today = dayjs();
-  $("#currentDay").text(today.format("MMM D, YYYY"));
+  $("#currentDay").text(today.format("MMM DD, YYYY"));
 
   // I am presented with timeblocks for standard business hours
   // WHEN I view the timeblocks for that day
   // THEN each timeblock is color coded to indicate whether it is in the past, present, or future
 
+  
   var currentTimeEl = dayjs();
   var hourOfDay = currentTimeEl.format("HH");
   $("#currentTime").text(hourOfDay);
-  currentTimeEl.visibility = "hidden";
-
-  var hour9Time = Number($("#hour-9").attr("data-time"));
-  if (hourOfDay > hour9Time) {
-    console.log(hour9Time + " is in the past");
-  }
+  // currentTimeEl.visibility = "hidden";
+colorTimeBlocks(hourOfDay)
+  
 });
 
-// var blockHour =
-var timeBlockEl = document.querySelector("#time-block");
+function colorTimeBlocks(hourOfDay) {
+  for(var i = 9; i < 18; i++) {
+    var hourTime = Number($(`#hour-${i}`).attr("data-time"));
+    var className;
+    if (hourOfDay > hourTime) {
+      className = "past"
+    }
+    else if (hourOfDay === hourTime) {
+      className = "present"
+    }
+    else {
+      className = "future"
+    }
+    $(`#hour-${i} textarea`).addClass(className)
+  }
+  
+}
 
-// / $('.time-block').each(function () {
-//     if(blockHour < currentTime) {
-//   blockHourEl.css('color', 'gray');
+saveUserInput();
 
-//     } else if (blockHour === currentTime) {
-//   blockHour.css('color','red');
+var savingTaskEntry = document.querySelector("#save");
 
-//     } else{
-//   blockHour.css('color','green');
-//     }
-//   })
+savingTaskEntry.addEventListener("click", saveUserInput);
 
-// $('');
+function saveUserInput() {
+ localStorage.getItem();
 
-//
-//   var stringVar =“3”
-//   var numVar = parseInt(stringVar)
-//   console.log(stringVar == numVar);
+}
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
