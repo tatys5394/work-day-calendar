@@ -8,17 +8,14 @@ $(document).ready(function () {
   // WHEN I view the timeblocks for that day
   // THEN each timeblock is color coded to indicate whether it is in the past, present, or future
 
-  
   var currentTimeEl = dayjs();
   var hourOfDay = currentTimeEl.format("HH");
-  $("#currentTime").text(hourOfDay);
-  // currentTimeEl.visibility = "hidden";
 colorTimeBlocks(hourOfDay)
-  
 });
 
 function colorTimeBlocks(hourOfDay) {
   for(var i = 9; i < 18; i++) {
+    var timeBlockID = localStorage.getItem("hour-"+i)
     var hourTime = Number($(`#hour-${i}`).attr("data-time"));
     var className;
   
@@ -32,19 +29,16 @@ function colorTimeBlocks(hourOfDay) {
       className = "future"
     }
     $(`#hour-${i} textarea`).addClass(className)
+    $(`#hour-${i} textarea`).val(timeBlockID) 
   }
 }
 
-saveUserInput();
-
-var savingTaskEntry = document.querySelector("#btn saveBtn col-2 col-md-1");
-
-savingTaskEntry.addEventListener("click", saveUserInput);
-
-function saveUserInput() {
- localStorage.setItem();
-
-}
+var saveBtn = $(".saveBtn");
+saveBtn.on("click", function(){
+  var timeBlockID = $(this).parent().attr("id")
+  var textarea = $(this).siblings("textarea").val()
+  localStorage.setItem(timeBlockID, textarea)
+})
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
